@@ -7,7 +7,7 @@ import axios from 'axios'
 
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 
-const API_KEY = 'sk-proj-OWHamlKIYoZVUUA8OckUT3BlbkFJIpfmrDTICnjnao2UccUs';
+ 
 
 function AiChatbot() {
     const navigate = useNavigate();
