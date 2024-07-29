@@ -1,0 +1,70 @@
+/* src/Navbar.css */
+
+.navbar {
+    background-color: #ffffff;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    font-weight: bolder;
+
+  }
+  .logo-container {
+    height: 120%;
+    overflow: hidden;
+    position: relative;
+    padding-left: 70px;
+  }
+    
+    .scrolling-logos {
+      display: flex;
+      flex-direction: column;  
+      height: calc(2 * 100%); 
+      animation: scroll 5s linear infinite; 
+      padding-left:140px;
+    }
+    
+    @keyframes scroll {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(-200%); /* Move one set of logos off-screen */
+      }
+    }
+    
+    .logo {
+      flex: 0 0 auto; /* Prevent shrinking/growing */
+      width: 100px; /* Adjust as needed */
+      height: auto; /* Maintain aspect ratio */
+      margin: 10px 0; /* Adjust spacing between logos */
+    }
+    
+    .item{
+    margin:0px 10px;
+   }
+
+   .contact{
+    background-color: black;
+    color: #ffffff;
+    border-radius: 30px;
+    height:70%;
+    margin-top: 5px;;
+   }
+@media (min-width:964px) {
+    .sections{
+        margin-left: 30vw;
+       }
+       .nav{
+        margin-left:-50px;
+       }
+}
+.logout{
+  background-color:darkred;
+  color: #ffffff;
+  border-radius: 30px;
+  height:70%;
+  margin-top: 2px;
+  margin-left: 7px;;
+ }

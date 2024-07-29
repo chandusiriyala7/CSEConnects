@@ -1,0 +1,58 @@
+/* src/AboutUs.css */
+.about-us {
+    background-color:lightblue;
+    padding: 2rem 1rem;
+    text-align: center;
+    border-radius: 20px;
+    height:100vh;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+  
+  .team-members {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  
+  .about-card {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    width: 15rem;
+    text-align: center;
+    width:25vw;
+    height:60vh;
+    margin:25px;
+  }
+  
+  .about-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .picture {
+    width: 16rem;
+    height: 16rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+  
+  .name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  
+  }
+  
+  .position {
+    color: #6b7280;
+  }
+  
