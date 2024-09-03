@@ -18,7 +18,7 @@ function Home() {
  
      
     useEffect(() => {
-        axios.get('https://cse-connects-data.vercel.app/blogs')
+        axios.get('https://cseconnects-api.onrender.com//blogs')
             .then(response => setBlogs(response.data))
             .catch(error => console.error('Error fetching blogs:', error));
     }, []);
