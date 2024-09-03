@@ -22,7 +22,7 @@ function Signup() {
         setErrors(validation(values))
         console.log(errors)
         if(errors.name === "" && errors.email === "" && errors.password === ""){
-                axios.post(`http://localhost:8081/signup`,values)
+                axios.post(`https://cse-connects-data.vercel.app//signup`,values)
                 .then(res => {
                     if(res.statusText === "OK"){
                        navigate('/login')
