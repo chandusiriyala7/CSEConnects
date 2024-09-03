@@ -5,14 +5,21 @@ const { generateFile } = require('./generateFile');
 const { executeCpp } = require('./executeCpp');
 const { executePy } = require('./executePy');
 require('dotenv').config();
+const fs = require('fs');
 const path = require('path');
+
+
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const dbPath = path.resolve('/temp/database.db');
+const dbPath = path.join(__dirname, './database.db');
 
+if (!fs.existsSync(dbPath)) {
+    fs.writeFileSync(dbPath, '');
+}
 
 // Initialize SQLite database
 const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
