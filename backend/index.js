@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const dbPath = path.resolve('/tmp/database.db');
+const dbPath = path.resolve('/temp/database.db');
 
 
 // Initialize SQLite database
