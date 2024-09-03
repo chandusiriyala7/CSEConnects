@@ -8,13 +8,11 @@
           "src": "/(.*)",
           "dest": "/"
         }
-    ]
-  }
-
-{
-  "functions": {
+    ],
+    "functions": {
     "api/*.js": {
       "maxDuration": 60
     }
   }
-}
+  }
+ 
