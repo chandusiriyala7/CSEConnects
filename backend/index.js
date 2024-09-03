@@ -5,8 +5,7 @@ const { generateFile } = require('./generateFile');
 const { executeCpp } = require('./executeCpp');
 const { executePy } = require('./executePy');
 require('dotenv').config();
-const fs = require('fs');
-const path = require('path');
+ 
 
 
 
@@ -17,9 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const dbPath = path.join(__dirname, './database.db');
 
-if (!fs.existsSync(dbPath)) {
-    fs.writeFileSync(dbPath, '');
-}
+ 
 
 // Initialize SQLite database
 const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
