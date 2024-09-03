@@ -10,3 +10,11 @@
         }
     ]
   }
+
+{
+  "functions": {
+    "api/*.js": {
+      "maxDuration": 60
+    }
+  }
+}
