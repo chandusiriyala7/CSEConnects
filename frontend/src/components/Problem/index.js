@@ -20,7 +20,7 @@ const Problem = () => {
                     return;
                 }
 
-                const response = await axios.get(`http://localhost:8081/problems/${id}`);
+                const response = await axios.get(`https://cse-connects-data.vercel.app/problems/${id}`);
                 const data = response.data;
                 if (data.length > 0) {
                     setProblem(data[0]);
