@@ -12,7 +12,7 @@ function Problems() {
 
     useEffect(() => {
         // Fetch problems data
-        axios.get("https://cse-connects-data.vercel.app/problems")
+        axios.get("https://cseconnects-api.onrender.com/problems")
             .then(res => {
                 const data = res.data;
                 setProblems(data);
