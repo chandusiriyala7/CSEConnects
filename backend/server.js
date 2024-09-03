@@ -1,60 +1,60 @@
 const express = require('express');
-const mysql = require('mysql');
+const sqlite3 = require('sqlite3').verbose(); // Import sqlite3
 const cors = require('cors');
 const { generateFile } = require('./generateFile');
-const { executeCpp } = require('./executeCpp')
-const {executePy} = require('./executePy')
+const { executeCpp } = require('./executeCpp');
+const { executePy } = require('./executePy');
 require('dotenv').config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded(({extended:true})));
+app.use(express.urlencoded({ extended: true }));
 
-const db = mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    password : '',
-    database :'signup',
-})
+// Initialize SQLite database
+const db = new sqlite3.Database('./database.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
+    if (err) {
+        console.error("Error opening database " + err.message);
+    } else {
+        console.log("Connected to the SQLite database.");
 
-// Signup API
-app.post('/signup' , (req,res) => {
-    const sql = "INSERT INTO login (`name`,`email`,`password`) VALUES (?)";
-    const values = [
-        req.body.name,
-        req.body.email,
-        req.body.password
-    ]
-    db.query(sql, [values], (err , data) =>{
-        if(err) {
-            return res.json("Error");
-        }
-        return res.json(data);
-    })
+        // Create tables if they don't exist
+        db.run(`CREATE TABLE IF NOT EXISTS login (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT,
+            email TEXT UNIQUE,
+            password TEXT
+        )`);
 
-    
-})
+        db.run(`CREATE TABLE IF NOT EXISTS blogs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT,
+            date TEXT,
+            description TEXT
+        )`);
 
+        db.run(`CREATE TABLE IF NOT EXISTS problems (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            topic TEXT,
+            title TEXT,
+            statement TEXT,
+            input TEXT,
+            output TEXT,
+            solution TEXT
+        )`);
 
-// Login API
-app.post('/login' , (req,res) => {
-    const sql = "SELECT * FROM login WHERE `email` = ? AND `password` = ?";
-    db.query(sql, [req.body.email,req.body.password], (err , data) =>{
-        if(err) {
-            return res.json("Error");
-        }
-        
-        if(data.length > 0){
-            return res.json("Success");
-        }else{
-            return res.json("Fail");
-        }
-    })
-
-    
-})
-
+        db.run(`CREATE TABLE IF NOT EXISTS quiz (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            topic TEXT,
+            question TEXT,
+            option1 TEXT,
+            option2 TEXT,
+            option3 TEXT,
+            option4 TEXT,
+            answer TEXT
+        )`);
+    }
+});
 
 // Code Compiler API
 app.post('/run' , async (req,res) => {
@@ -84,98 +84,126 @@ app.post('/run' , async (req,res) => {
     }
 });
 
-//Add Blogs API
+// Signup API
+app.post('/signup', (req, res) => {
+    const sql = "INSERT INTO login (name, email, password) VALUES (?, ?, ?)";
+    const { name, email, password } = req.body;
 
-app.post("/addblogs" ,(req,res) => {
-    const sql = "INSERT INTO blogs (`id`,`username`,`date`,`description`) VALUES (?)";
-    const blogDetails = [
-        req.body.id,
-        req.body.username,
-        req.body.date,
-        req.body.description,
-    ]
-    db.query(sql , [blogDetails] , (err,data) =>{
-        if(err){
-            console.log("Error")
-            return res.json(err);;
+    db.run(sql, [name, email, password], function (err) {
+        if (err) {
+            console.error(err.message);
+            return res.json("Error");
         }
-        return res.json(data);
-    })
-})
-
-//GET Blogs API
-
-app.get("/blogs" ,(req,res) => {
-    const sql =  "SELECT * FROM blogs";
-    db.query(sql, (err,data) =>{
-        if(err){
-            console.log("Error")
-        }
-        return res.json(data)
-    })
-})
-
-//DELETE Blogs API
-
-app.delete("/deleteblog" , (req,res) =>{
-    const sql = "DELETE FROM blogs WHERE `id` = ?;";
-    const blogId = req.body.blogId;
-  
-    db.query(sql,[blogId.id], (err,data) =>{
-
-        if(err){
-            console.log("Error");
-        }
-        return res.json({message : "Suucessfully deleted",data});
-    })
-})
-
-
-// GET Problems API 
-
-app.get("/problems", (req , res) => {
-    const sql = "SELECT * FROM problems";
-
-    db.query(sql,(err,data) =>{
-        if(err){
-            console.log("Error");
-        }
-        return res.json(data);
+        return res.json({ id: this.lastID });
     });
 });
 
-// GET Problem API 
+// Login API
+app.post('/login', (req, res) => {
+    const sql = "SELECT * FROM login WHERE email = ? AND password = ?";
+    const { email, password } = req.body;
 
-app.get("/problems/:id" , (req,res) =>{
-    const sql = "SELECT * FROM problems WHERE `id` = ?";
-    const id  = req.params.id;
-
-    db.query(sql, [id] , (err,data) =>{
-        if(err){
-            console.log("Error");
+    db.get(sql, [email, password], (err, row) => {
+        if (err) {
+            console.error(err.message);
+            return res.json("Error");
         }
-        return  res.json(data);
-    })
-})
+        if (row) {
+            return res.json("Success");
+        } else {
+            return res.json("Fail");
+        }
+    });
+});
 
-// GET Quiz Data 
+// Add Blogs API
+app.post("/addblogs", (req, res) => {
+    const sql = "INSERT INTO blogs (username, date, description) VALUES (?, ?, ?)";
+    const { username, date, description } = req.body;
 
-app.get('/quiz', (req,res) =>{
-    const sql = "SELECT * FROM quiz WHERE `topic` = ?";
+    db.run(sql, [username, date, description], function (err) {
+        if (err) {
+            console.error(err.message);
+            return res.json("Error");
+        }
+        return res.json({ id: this.lastID });
+    });
+});
+
+// Delete Blog API
+app.delete("/deleteblog", (req, res) => {
+    const sql = "DELETE FROM blogs WHERE id = ?";
+    const blogId = req.body.id;  
+
+    db.run(sql, [blogId], function (err) {
+        if (err) {
+            console.error(err.message);
+            return res.status(500).json({ message: "Error deleting blog" });
+        }
+        return res.json({ message: "Successfully deleted", changes: this.changes });
+    });
+});
+
+
+// Get Problems API
+app.get('/problems', (req, res) => {
+    const sql = "SELECT * FROM problems";
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            return res.status(500).json({ error: "Internal Server Error" });
+        }
+        return res.json(rows);
+    });
+});
+
+// Get Problem by ID API
+app.get('/problems/:id', (req, res) => {
+    const { id } = req.params;
+    const sql = "SELECT * FROM problems WHERE id = ?";
+    db.get(sql, [id], (err, row) => {
+        if (err) {
+            console.error(err.message);
+            return res.status(500).json({ error: "Internal Server Error" });
+        }
+        if (!row) {
+            return res.status(404).json({ error: "Problem not found" });
+        }
+        return res.json([row]); // Return as an array to match the client-side code
+    });
+});
+
+
+// Get Quiz API based on topic
+app.get('/quiz', (req, res) => {
     const topic = req.query.topic;
+    if (!topic) {
+        return res.status(400).json({ error: 'Topic query parameter is required' });
+    }
 
-    db.query(sql,[topic],(err,data) =>{
-        if(err){ 
-            console.log("Error")
+    const sql = "SELECT * FROM quiz WHERE topic = ?";
+    db.all(sql, [topic], (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            return res.status(500).json({ error: "Internal Server Error" });
         }
-        return res.json(data);
-    })
-})
+        return res.json(rows);
+    });
+});
 
-
- 
+// Get Blogs API
+app.get('/blogs', (req, res) => {
+    const sql = "SELECT * FROM blogs";
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            return res.json("Error");
+        }
+        return res.json(rows);
+    });
+});
 
 
 app.listen(8081, () => {
-    console.log("listening");
-})
+    console.log("Listening on port 8081");
+});
