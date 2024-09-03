@@ -20,7 +20,7 @@ function Compiler(){
             code,
         }
         try{
-        const { data } = await axios.post("https://cse-connects-data.vercel.app/run",payload)
+        const { data } = await axios.post("https://cseconnects-api.onrender.com/run",payload)
         setOutput(data.output)
         console.log(output)
          } catch(err){
