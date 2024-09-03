@@ -55,7 +55,7 @@ function Signup() {
                         </div>
                         <button type = "submit" className='btn btn-success w-100 rounded-0'> Signup </button>
                         <p>Existing User or Created Account!?</p>
-                        <Link to = "/login"   type = "button" className='btn btn-default border w-100 rounded-0 text-decoration-none'> Create Account </Link>
+                        <Link to = "/login"   type = "button" className='btn btn-default border w-100 rounded-0 text-decoration-none'> Login </Link>
                     </form>
                 </div>
         </div>
