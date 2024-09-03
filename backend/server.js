@@ -202,6 +202,9 @@ app.get('/blogs', (req, res) => {
         return res.json(rows);
     });
 });
+app.get('/', (req, res) => {
+    res.send('Hello, Chandusiriyala!');  
+});
 
 
 app.listen(8081, () => {
