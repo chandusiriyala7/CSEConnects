@@ -1,0 +1,24 @@
+.problems-page{
+    margin:25px;
+    color:black;
+}
+.problems{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin :10px 0px;
+    background-color: cadetblue;
+}
+.problem-title{
+    min-width:50vw;
+    margin-left:40px;
+}
+.topic{
+    min-width:20vw;
+    margin-left:30px;
+}
+
+.id{
+    min-width:5vw;
+}

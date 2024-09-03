@@ -1,0 +1,73 @@
+.compiler{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.compiler {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .compiler h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .compiler label {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .compiler select {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+  }
+  
+  .compiler textarea {
+    width: 100%;
+    max-width: 800px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    background: #fff;
+    resize: vertical;
+  }
+  
+  .compiler button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .compiler button:hover {
+    background-color: #0056b3;
+  }
+  
+  .compiler p {
+    font-size: 1rem;
+    color: #333;
+    margin: 20px 0;
+    white-space: pre-wrap; /* Ensure code output retains formatting */
+    max-width: 800px;
+    width: 100%;
+  }
+  
+  .error {
+    color: #d9534f; /* Bootstrap's danger color */
+  }
+  
