@@ -21,7 +21,7 @@ function Quiz() {
                     return;
                 }
 
-                const response = await axios.get(`https://cse-connects-data.vercel.app/quiz?topic=${activeId}`);
+                const response = await axios.get(`https://cseconnects-api.onrender.com/quiz?topic=${activeId}`);
                 console.log('Quiz data:', response.data); // Log data to check its structure
                 setQuiz(response.data);
                 setScore(0); // Reset score when topic changes
