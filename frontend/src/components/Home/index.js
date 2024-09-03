@@ -34,7 +34,7 @@ function Home() {
                 description: description,
             };
             setBlogs(prev => ([...prev, blogDetails]));
-            axios.post('https://cse-connects-data.vercel.app/addblogs', blogDetails)
+            axios.post('https://cseconnects-api.onrender.com/addblogs', blogDetails)
                 .then(response => console.log('Blog added:', response.data))
                 .catch(error => console.error('Error adding blog:', error));
         } else {
@@ -45,7 +45,7 @@ function Home() {
     };
 
     const deleteBlog = (id) => {
-        axios.delete('https://cse-connects-data.vercel.app/deleteblog', { data: { id } })
+        axios.delete('https://cseconnects-api.onrender.com/deleteblog', { data: { id } })
             .then(response => {
                 console.log('Blog deleted:', response.data);
                 setBlogs(prev => prev.filter(blog => blog.id !== id));
