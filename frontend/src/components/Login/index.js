@@ -26,7 +26,7 @@ function Login() {
         if(errors.email === "" && errors.password === ""){
             
             console.log(values)
-            axios.post(`http://localhost:8081/login`,values)
+            axios.post(`https://cse-connects-data.vercel.app/login`,values)
             .then(res => {
                 if(res.data === "Success"){
                     navigate('/')
