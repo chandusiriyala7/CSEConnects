@@ -18,7 +18,7 @@ function Home() {
  
      
     useEffect(() => {
-        axios.get('http://localhost:8081/blogs')
+        axios.get('https://cse-connects-data.vercel.app/blogs')
             .then(response => setBlogs(response.data))
             .catch(error => console.error('Error fetching blogs:', error));
     }, []);
@@ -34,7 +34,7 @@ function Home() {
                 description: description,
             };
             setBlogs(prev => ([...prev, blogDetails]));
-            axios.post('http://localhost:8081/addblogs', blogDetails)
+            axios.post('https://cse-connects-data.vercel.app/addblogs', blogDetails)
                 .then(response => console.log('Blog added:', response.data))
                 .catch(error => console.error('Error adding blog:', error));
         } else {
@@ -45,7 +45,7 @@ function Home() {
     };
 
     const deleteBlog = (id) => {
-        axios.delete('http://localhost:8081/deleteblog', { data: { id } })
+        axios.delete('https://cse-connects-data.vercel.app/deleteblog', { data: { id } })
             .then(response => {
                 console.log('Blog deleted:', response.data);
                 setBlogs(prev => prev.filter(blog => blog.id !== id));
