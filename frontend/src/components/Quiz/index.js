@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {useNavigate} from 'react-router-dom'
-import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 import './index.css';
 
@@ -9,8 +9,8 @@ function Quiz() {
     const [activeId, setActiveId] = useState("Arrays");
     const [score, setScore] = useState(0);
     const [curr, setCurr] = useState(0);
-    const [showAns, setShoWAns] = useState(false)
-    const navigate = useNavigate()
+    const [showAns, setShoWAns] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchQuiz = async () => {
@@ -34,7 +34,6 @@ function Quiz() {
 
         fetchQuiz();
     }, [activeId, navigate]);
-    
 
     const checkAnswer = (option, answer) => {
         if (option === answer) {
@@ -53,7 +52,7 @@ function Quiz() {
             </div>
             <div className='tabs'>
                 <button onClick={() => { setActiveId("Arrays") }}>Arrays</button>
-                <button onClick={() => { setActiveId("Linked Lists") }}>LinkedList</button>
+                <button onClick={() => { setActiveId("Linked Lists") }}>Linked Lists</button>
                 <button onClick={() => { setActiveId("Stacks") }}>Stacks</button>
                 <button onClick={() => { setActiveId("Queues") }}>Queues</button>
             </div>
@@ -64,32 +63,31 @@ function Quiz() {
                         <li>
                             <h4>{currentQuestion.question}</h4>
                             <div className='options'>
-                            <button onClick={() => { checkAnswer(currentQuestion.option1, currentQuestion.answer) }} className='btn btn-primary'>{currentQuestion.option1}</button>
-                            <button onClick={() => { checkAnswer(currentQuestion.option2, currentQuestion.answer) }} className='btn btn-primary'>{currentQuestion.option2}</button>
-                            <button onClick={() => { checkAnswer(currentQuestion.option3, currentQuestion.answer) }} className='btn btn-primary'>{currentQuestion.option3}</button>
-                            <button onClick={() => { checkAnswer(currentQuestion.option4, currentQuestion.answer) }} className='btn btn-primary'>{currentQuestion.option4}</button>
+                                <button onClick={() => { checkAnswer(currentQuestion.option1, currentQuestion.answer) }} className='btn btn-primary'>{currentQuestion.option1}</button>
+                                <button onClick={() => { checkAnswer(currentQuestion.option2, currentQuestion.answer) }} className='btn btn-primary'>{currentQuestion.option2}</button>
+                                <button onClick={() => { checkAnswer(currentQuestion.option3, currentQuestion.answer) }} className='btn btn-primary'>{currentQuestion.option3}</button>
+                                <button onClick={() => { checkAnswer(currentQuestion.option4, currentQuestion.answer) }} className='btn btn-primary'>{currentQuestion.option4}</button>
                             </div>
                         </li>
                     </ul>
                 ) : (
                     <div className='no-more'>
-                        <h1>Your Score is  :-  {score} / {quiz.length}</h1>
-                        <button onClick = {() => setShoWAns(!showAns)}>Show Answers</button>
+                        <h1>Your Score is: {score} / {quiz.length}</h1>
+                        <button onClick={() => setShoWAns(!showAns)}>Show Answers</button>
                     </div>
                 )}
             </div>
             <div>
-                <ol className='list -o'>
-                    {showAns &&
-                        quiz.map(each => (
-                            <li>
-                                 <h4>{each.question}</h4>
-                                 <h2>Answer :-    {each.answer}</h2>
+                {showAns && (
+                    <ol className='list -o'>
+                        {quiz.map((each, index) => (
+                            <li key={index}>
+                                <h4>{each.question}</h4>
+                                <h2>Answer: {each.answer}</h2>
                             </li>
-                           
-                        ))
-                    }
-                </ol>
+                        ))}
+                    </ol>
+                )}
             </div>
         </div>
     );
