@@ -12,7 +12,7 @@ function Problems() {
 
     useEffect(() => {
         // Fetch problems data
-        axios.get("http://localhost:8081/problems")
+        axios.get("https://cse-connects-data.vercel.app/problems")
             .then(res => {
                 const data = res.data;
                 setProblems(data);
