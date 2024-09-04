@@ -2,3 +2,32 @@
     background-image: url('https://rguktrkvalley462474092.wordpress.com/wp-content/uploads/2018/02/1a592d43-20ae-49e8-88cd-caea038fc526.png');
     background-size: cover;
 }
+.login-page {
+    padding: 15px;
+}
+
+@media (max-width: 768px) {
+    .login-page .w-25 {
+        width: 90% !important; /* Make the login form width responsive */
+    }
+
+    .login-page {
+        padding: 10px; /* Adjust padding for mobile */
+    }
+
+    .login-page .bg-white {
+        padding: 20px; /* Adjust inner padding for mobile */
+    }
+
+    .login-page label {
+        font-size: 14px; /* Adjust label size for mobile */
+    }
+
+    .login-page input {
+        font-size: 14px; /* Adjust input text size for mobile */
+    }
+
+    .login-page .btn {
+        font-size: 16px; /* Adjust button text size for mobile */
+    }
+}

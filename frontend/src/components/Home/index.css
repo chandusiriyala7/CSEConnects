@@ -3,6 +3,7 @@
     background-size: cover;
     background-repeat: repeat-y;
     min-height: 100vh;
+ 
 }
 
 .card{
@@ -172,4 +173,51 @@ label{
     background-color: #d9534f;
     transform: scale(1.05);
   }
-  
+  @media (max-width: 768px) {
+    .blog-head {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-info {
+        margin-top: 10px;
+        position: relative;
+        z-index: 10;
+    }
+}
+@media (max-width: 768px) {
+  .blog-list {
+      margin-top: 60px; /* Adjust as necessary to create space for navbar options */
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+      width: 90%;
+      padding: 10px;
+  }
+
+  .large-input {
+      width: 100%;
+      height: auto; /* Adjust height for mobile */
+  }
+
+  .avatar-container {
+      margin-right: 5px;
+  }
+
+  .username-container {
+      font-size: 14px;
+  }
+
+  .blog-description {
+      font-size: 12px;
+  }
+
+  .btn-info {
+      padding: 10px 15px;
+      font-size: 14px;
+  }
+}
+

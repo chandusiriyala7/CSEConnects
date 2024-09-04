@@ -2,3 +2,36 @@
     background-image: url('https://iiitrgukt.wordpress.com/wp-content/uploads/2011/11/388568_116527485124945_100003030819323_115447_344129401_n.jpg');
     background-size: cover;
 }
+.signup-page {
+    padding: 15px;
+}
+
+@media (max-width: 768px) {
+    .signup-page .w-25 {
+        width: 90% !important; /* Adjust the width of the signup form */
+    }
+
+    .signup-page {
+        padding: 10px; /* Adjust padding for mobile */
+    }
+
+    .signup-page .bg-white {
+        padding: 20px; /* Adjust inner padding for mobile */
+    }
+
+    .signup-page label {
+        font-size: 14px; /* Adjust label size for mobile */
+    }
+
+    .signup-page input {
+        font-size: 14px; /* Adjust input text size for mobile */
+    }
+
+    .signup-page .btn {
+        font-size: 16px; /* Adjust button text size for mobile */
+    }
+
+    .signup-page h2 {
+        font-size: 24px; /* Adjust heading size for mobile */
+    }
+}
