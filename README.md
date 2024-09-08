@@ -1,6 +1,5 @@
-<<<<<<< HEAD
-# cseconnect
-=======
 # CSEConnects
->>>>>>> origin/main
+
 It is an OnCampus Coding Platform where students can learn and code as well as they get blogs about the collage.
+
+# *Live Link* : https://cse-connects.vercel.app/
